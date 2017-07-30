@@ -1,0 +1,20 @@
+<h2> Add account </h2>
+
+<form id="new_account">
+	<input type="text" name="name" placeholder="Account name" id="new_account_name">
+	<input type="number" name="balance" placeholder="Balance" id="new_account_balance">
+
+
+	<select id="currency" name="currency">
+	    <option value="">--Select currency--</option>
+	    
+	    
+
+	</select>
+
+
+	<input type="submit" value="Add">
+
+</form>
+
+<ul id="accounts"></ul>
