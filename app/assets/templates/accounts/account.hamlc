@@ -1,0 +1,11 @@
+- @c = @currency.findWhere(id: @account.get('currency_id'))
+.panel.panel-default
+  .panel-heading
+    .panel-title
+      %h3= @account.get('name')
+
+  .panel-body
+    %p Balance: #{@account.get('balance') + ' ' + @c.get('symbol')}
+
+    %p Currency: #{@c.get('name')} (#{@c.get('symbol')})
+

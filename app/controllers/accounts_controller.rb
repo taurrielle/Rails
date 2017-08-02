@@ -3,7 +3,6 @@ class AccountsController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    
     @user = current_user
     respond_with @user.accounts.all
   end
@@ -13,9 +12,7 @@ class AccountsController < ApplicationController
   end
 
   def create
-
     respond_with current_user.accounts.create(account_params)
-
   end
 
 
@@ -30,7 +27,7 @@ class AccountsController < ApplicationController
 private
 
   def account_params
-        params.require(:account).permit(:name, :balance)
+    params.require(:account).permit(:name, :balance, :currency_id)
   end
 
 end
