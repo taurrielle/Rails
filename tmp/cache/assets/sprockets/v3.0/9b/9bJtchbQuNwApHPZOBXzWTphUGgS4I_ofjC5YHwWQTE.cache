@@ -1,0 +1,18 @@
+{:uriI"äfile://app/assets/templates/accounts/new_account.hamlc?type=text/hamlc&id=19c44c59fa52e2374c33e4deae9f6e6aa54ba9932cf4967e485a2c1144f3cc6f:ET:load_pathI"app/assets/templates;T:filenameI"4app/assets/templates/accounts/new_account.hamlc;T:	nameI"accounts/new_account;T:logical_pathI"accounts/new_account.hamlc;T:content_typeI"text/hamlc;T:sourceI"0%h2 Add account
+
+%form{:id => "new_account"}
+  %input{:type => "text", :name => "name", :placeholder => "Account name", :id => "new_account_name"}
+  %input{:type => "number", :name => "balance", :placeholder => "Balance", :id => "new_account_balance"}
+
+  %div{:id => "dropdown"}
+
+  %select{:form => "new_account", :id => "new_account_currency"}
+    %option{:value => ""} --Select a currency--
+      -for c in @currency.models
+        %option{:value => "#{c.get('id')}"} =c.get("name") + "(" + c.get("symbol") + ")"
+
+  %input{:type => "submit", :value => "Add"};T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI"Bfile-digest://app/assets/templates/accounts/new_account.hamlc;TTF:charsetI"
+utf-8;F:digest"%LÃ„ù<˙}∏Huîh≠≠lNÚJuO]eÚÚﬂ Ô#L˝:lengthi0:dependencies_digest"%˜‘ŒG 	ã'Ô¥îÄ®l}f∑;Ÿl¨A9†…:idI"E19c44c59fa52e2374c33e4deae9f6e6aa54ba9932cf4967e485a2c1144f3cc6f;F:
+mtimel+A¿ÅY

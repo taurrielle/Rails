@@ -21,6 +21,3 @@ end
 
 Currency.create!(data)
 
-Account.delete_all
-Account.create!(name: "for uni", balance: 40000, user_id: 2)
-  
