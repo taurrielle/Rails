@@ -36,7 +36,7 @@ class DemoApp.Views.AccountsIndex extends Backbone.View
     event.preventDefault()
     attributes = name: $('#new_account_name').val(),
     balance: $('#new_account_balance').val(),
-    currency_id: $('#new_account_currency').val()
+    currency: $('#new_account_currency').val()
     @collection.create attributes,
       wait: true
       success: ->

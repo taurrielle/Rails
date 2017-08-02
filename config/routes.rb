@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  
+
   devise_for :users
 
   scope "api" do
   	resources :accounts
   	resources :currencies
+    resources :transactions
   end
 
   root to: "pages#home"

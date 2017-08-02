@@ -1,0 +1,31 @@
+{:uriI"„file://app/assets/templates/accounts/index.hamlc?type=text/hamlc&id=d408d3edb7df643090c886050240060d783353366072d68212a32ac3e9a89938:ET:load_pathI"app/assets/templates;T:filenameI".app/assets/templates/accounts/index.hamlc;T:	nameI"accounts/index;T:logical_pathI"accounts/index.hamlc;T:content_typeI"text/hamlc;T:sourceI"Í%button{:class => "btn btn-primary", :id => "account_button"} Add account
+%div{:id => "account_form"}
+  %h2 Add account
+  %div{:id => "error", :class => "alert alert-danger"}
+
+  %form{:id => "new_account"}
+    .form-group
+      %label Name:
+      %input{:class => "form-control", :type => "text", :name => "name", :placeholder => "Account name", :id => "new_account_name"}
+
+    .form-group
+      %label Balance:
+      %input{:class => "form-control", :type => "number", :name => "balance", :placeholder => "Balance", :id => "new_account_balance"}
+
+    .form-group
+      %label Currency:
+      %select{:class => "form-control", :id => "new_account_currency"}
+        %option{:value => ""} Select a currency
+        -for c in @currency.models
+          %option{:value => "#{c.get('code')}"} = c.get("name") + " (" + c.get("symbol") + ")"
+
+    .form-group
+      %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
+
+
+%h2 Your accouts
+%div{:id => "accounts"};T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI"<file-digest://app/assets/templates/accounts/index.hamlc;TTF:charsetI"
+utf-8;F:digest"%o_ó,÷êso¤*©ªúÃ+«ÍEÚÈ)LPQwÂ¾ÁÙ%:lengthiÍ:dependencies_digest"%µš„io¤û~…&ÙMI–Wç›+=èºÈ,”‰úI³:idI"Ed408d3edb7df643090c886050240060d783353366072d68212a32ac3e9a89938;F:
+mtimel+t*‚Y

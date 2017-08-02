@@ -1,4 +1,4 @@
-- @c = @currency.findWhere(id: @account.get('currency_id'))
+- @c = @currency.findWhere(code: @account.get('currency'))
 .panel.panel-default
   .panel-heading
     .panel-title
