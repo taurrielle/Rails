@@ -42573,3 +42573,624 @@ Processing by Devise::RegistrationsController#new as HTML
 Completed 200 OK in 82ms (Views: 80.2ms | ActiveRecord: 0.0ms)
 
 
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeCurrency (20170802192325)
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TEMPORARY TABLE "aaccounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar DEFAULT NULL, "balance" decimal DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "currency_id" integer DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_accounts_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_accounts_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "tindex_aaccounts_on_user_id" ON "aaccounts" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "aaccounts" ("id","name","balance","user_id","created_at","updated_at","currency_id")
+                     SELECT "id","name","balance","user_id","created_at","updated_at","currency_id" FROM "accounts"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "accounts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar DEFAULT NULL, "balance" decimal DEFAULT NULL, "user_id" integer DEFAULT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='tindex_aaccounts_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='tindex_aaccounts_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_accounts_on_user_id" ON "accounts" ("user_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "accounts" ("id","name","balance","user_id","created_at","updated_at")
+                     SELECT "id","name","balance","user_id","created_at","updated_at" FROM "aaccounts"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "aaccounts"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "accounts" ADD "currency" varchar[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20170802192325"]]
+  [1m[35m (57.8ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_accounts_on_user_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_accounts_on_user_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_reset_password_token' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m  [1m[34m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_users_on_email' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_users_on_email' AND type='index'
+[0m
+Started GET "/api/currencies.json" for 127.0.0.1 at 2017-08-02 22:38:49 +0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 44ms (Views: 31.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-08-02 22:39:45 +0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Redirected to http://localhost:3000/pages/accounts
+  Rendered pages/home.html.erb within layouts/application (14.5ms)
+Completed 302 Found in 1207ms (Views: 1204.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:39:46 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 51ms (Views: 43.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:39:47 +0300
+Processing by AccountsController#index as JSON
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:39:47 +0300
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.9ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 36ms (Views: 32.3ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:39:47 +0300
+  [1m[36mAccount Load (0.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 24ms (Views: 21.4ms | ActiveRecord: 0.4ms)
+
+
+  [1m[36mCurrency Load (0.6ms)[0m  [1m[34mSELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?[0m  [["currency", 67], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 139ms (ActiveRecord: 1.9ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: currencies.currency: SELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:39:56 +0300
+Processing by AccountsController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Completed 406 Not Acceptable in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActionController::UnknownFormat (ActionController::UnknownFormat):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+Started GET "/api/accounts.json" for 127.0.0.1 at 2017-08-02 22:40:02 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?[0m  [["currency", 67], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.8ms)
+
+
+  
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: currencies.currency: SELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?):
+  
+app/controllers/accounts_controller.rb:7:in `index'
+  [1m[35mSQL (78.6ms)[0m  [1m[31mDELETE FROM "accounts"[0m
+Started GET "/api/accounts.json" for 127.0.0.1 at 2017-08-02 22:41:43 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:42:51 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 43ms (Views: 41.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:42:51 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:42:51 +0300
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Processing by CurrenciesController#index as JSON
+Completed 200 OK in 8ms (Views: 2.1ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mCurrency Load (0.8ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 29ms (Views: 25.4ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:42:51 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.5ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 26ms (Views: 23.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:42:52 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.2ms)
+Completed 200 OK in 47ms (Views: 43.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:42:53 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Completed 200 OK in 7ms (Views: 1.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:42:53 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 23ms (Views: 20.2ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:42:53 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 21ms (Views: 17.7ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:00 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"bla", "balance"=>"", "currency_id"=>"", "account"=>{"name"=>"bla", "balance"=>""}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 17ms (ActiveRecord: 0.3ms)
+
+
+  
+NoMethodError (undefined method `currency_id' for #<Account:0x007f3560566980>
+Did you mean?  currency
+               currency?
+               currency=
+               currency_was):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:08 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"bla", "balance"=>"6868", "currency_id"=>"BWP", "account"=>{"name"=>"bla", "balance"=>"6868"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.4ms)
+
+
+  
+NoMethodError (undefined method `currency_id' for #<Account:0x007f3568c40668>
+Did you mean?  currency
+               currency?
+               currency=
+               currency_was):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:10 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"bla", "balance"=>"6868", "currency_id"=>"BWP", "account"=>{"name"=>"bla", "balance"=>"6868"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.3ms)
+
+
+  
+NoMethodError (undefined method `currency_id' for #<Account:0x007f35686bb3c8>
+Did you mean?  currency
+               currency?
+               currency=
+               currency_was):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:11 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"bla", "balance"=>"6868", "currency_id"=>"BWP", "account"=>{"name"=>"bla", "balance"=>"6868"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.3ms)
+
+
+  
+NoMethodError (undefined method `currency_id' for #<Account:0x007f3566e37b58>
+Did you mean?  currency
+               currency?
+               currency=
+               currency_was):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:43:32 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 414ms (Views: 411.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:32 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:43:32 +0300
+Completed 200 OK in 7ms (Views: 1.8ms | ActiveRecord: 0.5ms)
+
+
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 28ms (Views: 24.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:43:33 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.6ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 34ms (Views: 30.8ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:43:40 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"fdjf", "balance"=>"48585", "currency"=>"BDT", "account"=>{"name"=>"fdjf", "balance"=>"48585", "currency"=>"BDT"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Currency(#25485320) expected, got "BDT" which is an instance of String(#10666080)):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:44:15 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 306ms (Views: 303.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:44:16 +0300
+Processing by AccountsController#index as JSON
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:44:16 +0300
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Processing by CurrenciesController#index as JSON
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mCurrency Load (0.4ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 11ms (Views: 3.7ms | ActiveRecord: 0.6ms)
+
+
+Completed 200 OK in 25ms (Views: 23.1ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:44:16 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 22ms (Views: 19.0ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:44:22 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"fdf", "balance"=>"454", "currency"=>"BDT", "account"=>{"name"=>"fdf", "balance"=>"454", "currency"=>"BDT"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Currency(#25485320) expected, got "BDT" which is an instance of String(#10666080)):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ira0812@ya.ru"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ira0812@ya.ru"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "balance", "user_id", "created_at", "updated_at", "currency") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "bla"], ["balance", 757.0], ["user_id", 2], ["created_at", "2017-08-02 19:47:36.273264"], ["updated_at", "2017-08-02 19:47:36.273264"], ["currency", "USD"]]
+  [1m[35m (106.6ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ira0812@ya.ru"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "ira0812@ya.ru"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:50:18 +0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 900ms (Views: 877.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:50:19 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:50:19 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mCurrency Load (0.3ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+  [1m[36mCurrency Load (0.3ms)[0m  [1m[34mSELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?[0m  [["currency", 73], ["LIMIT", 1]]
+Completed 200 OK in 55ms (Views: 24.9ms | ActiveRecord: 1.0ms)
+
+
+Completed 500 Internal Server Error in 78ms (ActiveRecord: 2.0ms)
+
+
+  
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:50:19 +0300
+ActiveRecord::StatementInvalid (SQLite3::SQLException: no such column: currencies.currency: SELECT  "currencies".* FROM "currencies" WHERE "currencies"."currency" = ? LIMIT ?):
+Processing by CurrenciesController#index as JSON
+  
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+app/controllers/accounts_controller.rb:7:in `index'
+Completed 200 OK in 20ms (Views: 16.8ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:50:29 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"fdjfj", "balance"=>"994", "currency"=>"BDT", "account"=>{"name"=>"fdjfj", "balance"=>"994", "currency"=>"BDT"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 4ms (ActiveRecord: 0.4ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Currency(#70177988313740) expected, got "BDT" which is an instance of String(#4431960)):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:50:59 +0300
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 507ms (Views: 482.1ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:51:00 +0300
+Processing by AccountsController#index as JSON
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:51:00 +0300
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Processing by CurrenciesController#index as JSON
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+  [1m[36mCurrency Load (0.5ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+  [1m[36mCurrency Load (0.3ms)[0m  [1m[34mSELECT  "currencies".* FROM "currencies" WHERE "currencies"."code" = ? LIMIT ?[0m  [["code", "73"], ["LIMIT", 1]]
+Completed 200 OK in 65ms (Views: 32.9ms | ActiveRecord: 1.3ms)
+
+
+Completed 200 OK in 90ms (Views: 54.6ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:51:00 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.6ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 25ms (Views: 22.5ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:51:11 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"fdj", "balance"=>"858", "currency"=>"BDT", "account"=>{"name"=>"fdj", "balance"=>"858", "currency"=>"BDT"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+Completed 500 Internal Server Error in 3ms (ActiveRecord: 0.3ms)
+
+
+  
+ActiveRecord::AssociationTypeMismatch (Currency(#70098287921180) expected, got "BDT" which is an instance of String(#15409240)):
+  
+app/controllers/accounts_controller.rb:15:in `create'
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:52:06 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 58ms (Views: 42.8ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:52:07 +0300
+Processing by AccountsController#index as JSON
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:52:07 +0300
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+Processing by CurrenciesController#index as JSON
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 2]]
+Completed 200 OK in 31ms (Views: 12.9ms | ActiveRecord: 1.3ms)
+
+
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 44ms (Views: 24.8ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:52:07 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.5ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 20ms (Views: 17.5ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:52:22 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"kfdkjdskja", "balance"=>"89493", "currency"=>"BWP", "account"=>{"name"=>"kfdkjdskja", "balance"=>"89493", "currency"=>"BWP"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "balance", "user_id", "created_at", "updated_at", "currency") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "kfdkjdskja"], ["balance", 89493.0], ["user_id", 2], ["created_at", "2017-08-02 19:52:22.207089"], ["updated_at", "2017-08-02 19:52:22.207089"], ["currency", "BWP"]]
+  [1m[35m (149.6ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 162ms (Views: 2.5ms | ActiveRecord: 150.3ms)
+
+
+Started DELETE "/users/sign_out" for 127.0.0.1 at 2017-08-02 22:52:46 +0300
+Processing by Devise::SessionsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"IhBCwSkPjwxwhOY1Kd1UPysM49vsMIu/uCnTN4dLnHqrYi8Auna0+8JvYk8urvScEzuZmx939AdDVz60kjkXnw=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-08-02 22:52:46 +0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (3.4ms)
+Completed 200 OK in 82ms (Views: 81.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:52:47 +0300
+Processing by AccountsController#index as JSON
+Completed 500 Internal Server Error in 18ms (ActiveRecord: 0.0ms)
+
+
+  
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:52:47 +0300
+NoMethodError (undefined method `accounts' for nil:NilClass):
+  
+Processing by CurrenciesController#index as JSON
+app/controllers/accounts_controller.rb:7:in `index'
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 54ms (Views: 51.3ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/users/sign_in" for 127.0.0.1 at 2017-08-02 22:52:49 +0300
+Processing by Devise::SessionsController#new as HTML
+  Rendering /home/ira/.rvm/gems/ruby-2.3.3/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application
+  Rendered /home/ira/.rvm/gems/ruby-2.3.3/gems/devise-4.3.0/app/views/devise/shared/_links.html.erb (0.9ms)
+  Rendered /home/ira/.rvm/gems/ruby-2.3.3/gems/devise-4.3.0/app/views/devise/sessions/new.html.erb within layouts/application (13.8ms)
+Completed 200 OK in 69ms (Views: 67.0ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/users/sign_in" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+Processing by Devise::SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"d3u6buSju+ZBcI44L/6Kadb3qjxTuzrEJG8YvO7HTgsHaY2ubhXCBx2LaVkC3+z3pNhpV4gz17NT3D7kFCiQrg==", "user"=>{"email"=>"irene.ungureanu96@gmail.com", "password"=>"[FILTERED]", "remember_me"=>"0"}, "commit"=>"Log in"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["email", "irene.ungureanu96@gmail.com"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "users" SET "current_sign_in_at" = ?, "last_sign_in_at" = ?, "sign_in_count" = ?, "updated_at" = ? WHERE "users"."id" = ?[0m  [["current_sign_in_at", "2017-08-02 19:52:51.511973"], ["last_sign_in_at", "2017-08-01 20:13:16.062235"], ["sign_in_count", 23], ["updated_at", "2017-08-02 19:52:51.512697"], ["id", 3]]
+  [1m[35m (57.7ms)[0m  [1m[36mcommit transaction[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 282ms (ActiveRecord: 58.4ms)
+
+
+Started GET "/" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Redirected to http://localhost:3000/pages/accounts
+  Rendered pages/home.html.erb within layouts/application (1.9ms)
+Completed 302 Found in 53ms (Views: 52.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 45ms (Views: 43.2ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 3]]
+Processing by CurrenciesController#index as JSON
+Completed 200 OK in 8ms (Views: 3.2ms | ActiveRecord: 0.5ms)
+
+
+  [1m[36mCurrency Load (0.6ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 36ms (Views: 32.5ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:52:51 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.8ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 32ms (Views: 28.5ms | ActiveRecord: 0.8ms)
+
+
+Started POST "/api/accounts" for 127.0.0.1 at 2017-08-02 22:53:07 +0300
+Processing by AccountsController#create as JSON
+  Parameters: {"name"=>"irene's", "balance"=>"69", "currency"=>"BWP", "account"=>{"name"=>"irene's", "balance"=>"69", "currency"=>"BWP"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "balance", "user_id", "created_at", "updated_at", "currency") VALUES (?, ?, ?, ?, ?, ?)[0m  [["name", "irene's"], ["balance", 69.0], ["user_id", 3], ["created_at", "2017-08-02 19:53:07.722744"], ["updated_at", "2017-08-02 19:53:07.722744"], ["currency", "BWP"]]
+  [1m[35m (168.8ms)[0m  [1m[36mcommit transaction[0m
+Completed 201 Created in 179ms (Views: 0.5ms | ActiveRecord: 170.1ms)
+
+
+Started GET "/api/accounts.json" for 127.0.0.1 at 2017-08-02 22:59:48 +0300
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 3]]
+Completed 200 OK in 50ms (Views: 7.8ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/pages/accounts" for 127.0.0.1 at 2017-08-02 22:59:52 +0300
+Processing by PagesController#accounts as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  Rendering pages/accounts.html.erb within layouts/application
+  Rendered pages/accounts.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 606ms (Views: 601.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/api/accounts" for 127.0.0.1 at 2017-08-02 22:59:53 +0300
+Processing by AccountsController#index as JSON
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = ? ORDER BY "users"."id" ASC LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 3]]
+Completed 200 OK in 8ms (Views: 2.1ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:59:53 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.7ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 44ms (Views: 37.1ms | ActiveRecord: 1.3ms)
+
+
+Started GET "/api/currencies" for 127.0.0.1 at 2017-08-02 22:59:53 +0300
+Processing by CurrenciesController#index as JSON
+  [1m[36mCurrency Load (0.8ms)[0m  [1m[34mSELECT "currencies".* FROM "currencies"[0m
+Completed 200 OK in 21ms (Views: 17.6ms | ActiveRecord: 0.8ms)
+
+

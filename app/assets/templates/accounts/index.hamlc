@@ -17,7 +17,7 @@
       %select{:class => "form-control", :id => "new_account_currency"}
         %option{:value => ""} Select a currency
         -for c in @currency.models
-          %option{:value => "#{c.get('id')}"} = c.get("name") + " (" + c.get("symbol") + ")"
+          %option{:value => "#{c.get('code')}"} = c.get("name") + " (" + c.get("symbol") + ")"
 
     .form-group
       %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
