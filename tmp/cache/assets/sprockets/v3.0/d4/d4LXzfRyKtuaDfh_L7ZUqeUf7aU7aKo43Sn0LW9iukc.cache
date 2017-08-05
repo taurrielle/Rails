@@ -1,16 +1,0 @@
-{:uriI"†file://app/assets/templates/accounts/account.hamlc?type=text/hamlc&id=9c3a3809939342b3f25772fbe32f9f752edca6228b883a8f51fae08f998ce86f:ET:load_pathI"app/assets/templates;T:filenameI"0app/assets/templates/accounts/account.hamlc;T:	nameI"accounts/account;T:logical_pathI"accounts/account.hamlc;T:content_typeI"text/hamlc;T:sourceI" - @c = @currency.findWhere(code: @account.get('currency'))
-.panel.panel-default
-  .panel-heading
-    .panel-title
-      %h3= @account.get('name')
-
-  .panel-body
-    %p Balance: #{@account.get('balance') + ' ' + @c.get('symbol')}
-
-    %p Currency: #{@c.get('name')} (#{@c.get('symbol')})
-
-;T:metadata{	:dependencieso:Set:
-@hash}
-I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI">file-digest://app/assets/templates/accounts/account.hamlc;TTF:charsetI"
-utf-8;F:digest"%O“üyüæ‰;âÍ“ŠĞ*@E¶?‰ïlş¸¾ë«€D:lengthi :dependencies_digest"%?É‚¢=|ĞÚKé	´¶±)‡¯`bÌŒ_iØ F|:idI"E9c3a3809939342b3f25772fbe32f9f752edca6228b883a8f51fae08f998ce86f;F:
-mtimel+Y*‚Y

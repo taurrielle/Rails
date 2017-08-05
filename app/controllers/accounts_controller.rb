@@ -17,7 +17,7 @@ class AccountsController < ApplicationController
 
 
   def update
-    respond_with Account.update(params[:id], params[:account])
+    respond_with Account.find(params[:id]).update(balance_param)
   end
 
   def destroy
@@ -28,6 +28,10 @@ private
 
   def account_params
     params.require(:account).permit(:name, :balance, :currency)
+  end
+
+  def balance_param
+    params.require(:account).permit(:balance)
   end
 
 end

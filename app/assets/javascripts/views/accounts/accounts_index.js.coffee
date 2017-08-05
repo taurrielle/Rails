@@ -23,15 +23,6 @@ class DemoApp.Views.AccountsIndex extends Backbone.View
     view = new DemoApp.Views.Account(model: account, collection:@currency)
     @$('#accounts').append(view.render().el)
 
-  showForm: ->
-    if ( $('#account_form').css('display') == 'none' )
-      $('#account_form').css('display', 'block')
-      $('#account_button').html('Cancel')
-    else
-      $('#account_form').css('display', 'none')
-      $('#new_account')[0].reset()
-      $('#account_button').html('Add account')
-
   createAccount: (event) ->
     event.preventDefault()
     attributes = name: $('#new_account_name').val(),
@@ -39,11 +30,8 @@ class DemoApp.Views.AccountsIndex extends Backbone.View
     currency: $('#new_account_currency').val()
     @collection.create attributes,
       wait: true
-      success: ->
-        $('#new_account')[0].reset()
-        $('#account_form').css('display', 'none')
-        $('#account_button').html('Add account')
-        $('#error').css('display', 'none')
+      success: =>
+        @showForm()
       error: @handleError
 
   handleError: (account, response) ->
@@ -54,3 +42,12 @@ class DemoApp.Views.AccountsIndex extends Backbone.View
       for attribute, messages of errors
         $('#error').append('<li>' + 'The ' + attribute + ' ' + message + '</li>') for message in messages
 
+  showForm: ->
+    if ( $('#account_form').css('display') == 'none' )
+      $('#account_form').css('display', 'block')
+      $('#account_button').html('Cancel')
+    else
+      $('#account_form').css('display', 'none')
+      $('#new_account')[0].reset()
+      $('#account_button').html('Add account')
+      $('#error').css('display', 'none')

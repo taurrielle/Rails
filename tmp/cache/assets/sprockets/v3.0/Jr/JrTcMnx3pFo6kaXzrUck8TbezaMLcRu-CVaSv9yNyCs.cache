@@ -1,0 +1,34 @@
+{:uriI"ˆfile://app/assets/templates/transactions/index.hamlc?type=text/hamlc&id=bc9748f50adf44268452e845c97fe5193da35e00a55ebee2607378c5ed18dc58:ET:load_pathI"app/assets/templates;T:filenameI"2app/assets/templates/transactions/index.hamlc;T:	nameI"transactions/index;T:logical_pathI"transactions/index.hamlc;T:content_typeI"text/hamlc;T:sourceI"	%h2 Add transaction
+%div{:id => "error", :class => "alert alert-danger"}
+
+%form{:id => "new_transaction"}
+  .form-group
+    %label Account:
+    %select{:class => "form-control", :id => "new_transaction_account"}
+      %option{:value => ""} Select an account
+      -for account in @accounts.models
+        %option{:value => "#{account.get('id')}"} = account.get("name")
+
+  .form-group
+    %label Ammount:
+    %input{:class => "form-control", :type => "number", :name => "ammount", :placeholder => "Ammount", :id => "new_transaction_ammount"}
+
+  .form-group
+    %label Description:
+    %input{:class => "form-control", :type => "text", :name => "description", :placeholder => "Description", :id => "new_transaction_description"}
+
+  .form-group
+    %label Made on:
+    %input{:class => "form-control", :type => "date", :name => "made on", :placeholder => "Date", :id => "new_transaction_date"}
+
+  .form-group
+    %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
+
+
+%h2 Your transactions
+%div{:id => "transactions"};T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI"@file-digest://app/assets/templates/transactions/index.hamlc;TTF:charsetI"
+utf-8;F:digest"%²ìGÁ¾Füu1F7‡¼LGjÜp&Ö5º¤]ø:lengthi	:dependencies_digest"%¹ãäÍãa­ì¸IsF²—
+¦èy	9ïüû¶(fõè:idI"Ebc9748f50adf44268452e845c97fe5193da35e00a55ebee2607378c5ed18dc58;F:
+mtimel+X„Y
