@@ -5,6 +5,7 @@
 //= require hamlcoffee
 //= require underscore
 //= require backbone
+//= require backbone.marionette
 //= require select2
 //= require demo_app
 //= require_tree ../templates

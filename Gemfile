@@ -40,7 +40,8 @@ gem 'jquery-rails'
 
 gem 'haml_coffee_assets'
 gem 'execjs'
-gem "select2-rails"
+gem 'select2-rails'
+gem 'marionette-rails'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

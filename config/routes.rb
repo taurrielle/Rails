@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   get  '/sign_up', to: 'users#sign_up'
   get '/log_in', to: 'users#log_in'
   get 'pages/accounts'
-  get 'pages/new_account'
+  get 'pages/transactions'
 
 end

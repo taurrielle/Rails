@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ammount: 9.99
+  description: MyText
+  made_on_date: 2017-08-02
+  currency: MyString
+  account: one
+  user: one
+
+two:
+  ammount: 9.99
+  description: MyText
+  made_on_date: 2017-08-02
+  currency: MyString
+  account: two
+  user: two

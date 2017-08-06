@@ -92,7 +92,7 @@ form {
   display: none;
 }
 
-#accounts {
+#accounts, #transactions {
   width: 350px;
   display: block;
   margin-left: auto;
@@ -100,9 +100,10 @@ form {
   padding-left: 0px;
 }
 
-#account_form {
+#account_form, #transaction_form {
   display: none;
 }
+
 
 input[type="checkbox"], input[type="radio"] {
   width: 5%;
