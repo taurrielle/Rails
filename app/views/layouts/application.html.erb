@@ -10,8 +10,18 @@
   <body>
     <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
-        <%= link_to "App", root_path, id: "logo" %>
+        <%= link_to "App", root_path, id: "logo", data: { turbolinks: false }  %>
         <nav>
+          <% if user_signed_in? %>
+            <ul class="nav navbar-nav">
+              <li class="<%= 'active' if current_page?(pages_accounts_path) %>">
+                <%= link_to "Accounts", pages_accounts_path, data: { turbolinks: false }  %>
+              </li>
+              <li class="<%= 'active' if current_page?(pages_transactions_path) %>">
+                <%= link_to "Transactions", pages_transactions_path, data: { turbolinks: false }  %>
+              </li>
+            </ul>
+          <% end %>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
               <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
@@ -23,10 +33,9 @@
       </div>
     </header>
     <div class="container">
-      <%= link_to "Accounts", pages_accounts_path %>
-    <div id="app">
-      <%= yield %>
-    </div>
+      <div id="app">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

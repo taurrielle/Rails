@@ -1,0 +1,36 @@
+{:uriI"ˆfile://app/assets/templates/transactions/index.hamlc?type=text/hamlc&id=e212913c3f1725800241b9846b174669518f32c0e05855dfb5f378987cdc6e3d:ET:load_pathI"app/assets/templates;T:filenameI"2app/assets/templates/transactions/index.hamlc;T:	nameI"transactions/index;T:logical_pathI"transactions/index.hamlc;T:content_typeI"text/hamlc;T:sourceI"¤%button{:class => "btn btn-primary", :id => "transaction_button"} Add transaction
+%div{:id => "transaction_form"}
+
+  %h2 Add transaction
+  %div{:id => "error", :class => "alert alert-danger"}
+
+  %form{:id => "new_transaction"}
+    .form-group
+      %label Account:
+      %select{:class => "form-control", :id => "new_transaction_account"}
+        %option{:value => ""} Select an account
+        -for account in @accounts.models
+          %option{:value => "#{account.get('id')}"} = account.get("name")
+
+    .form-group
+      %label Ammount:
+      %input{:class => "form-control", :type => "number", :name => "ammount", :placeholder => "Ammount", :id => "new_transaction_ammount"}
+
+    .form-group
+      %label Description:
+      %input{:class => "form-control", :type => "text", :name => "description", :placeholder => "Description", :id => "new_transaction_description"}
+
+    .form-group
+      %label Made on:
+      %input{:class => "form-control", :type => "date", :name => "made on", :placeholder => "Date", :id => "new_transaction_date"}
+
+    .form-group
+      %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
+
+
+%h2 Your transactions
+%div{:id => "transactions"};T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI"@file-digest://app/assets/templates/transactions/index.hamlc;TTF:charsetI"
+utf-8;F:digest"%Éé0÷·=p0Xã@Õvç¹øjîpşr÷ÍØÜ—‚:lengthi¤:dependencies_digest"%”:P_ì›èu(j«Dµ#ã¿Ú‘ò­¿s èBmò:idI"Ee212913c3f1725800241b9846b174669518f32c0e05855dfb5f378987cdc6e3d;F:
+mtimel+W…Y
