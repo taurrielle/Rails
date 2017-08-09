@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :confirmations => "confirmations" }
 
-  scope "api" do
+  scope "api", defaults: { format: 'json' } do
   	resources :accounts
   	resources :currencies
     resources :transactions
@@ -14,7 +14,6 @@ Rails.application.routes.draw do
       post :create
     end
   end
-
 
   root to: "pages#home"
   get  '/sign_up', to: 'users#sign_up'

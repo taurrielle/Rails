@@ -33,11 +33,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'backbone-on-rails'
-
 gem 'jquery-turbolinks'
-
 gem 'jquery-rails'
-
 gem 'haml_coffee_assets'
 gem 'execjs'
 gem 'select2-rails'
@@ -52,6 +49,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'minitest-reporters'
 end
 
 group :development do

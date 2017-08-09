@@ -1,15 +1,9 @@
 class PagesController < ApplicationController
-	before_action :authenticate_user!, :except => [:home]
+  before_action :authenticate_user!, except: [:home]
 
-	def home
+  def home; end
 
-	end
+  def accounts; end
 
-	def accounts
-
-	end
-
-  def transactions
-
-  end
+  def transactions; end
 end

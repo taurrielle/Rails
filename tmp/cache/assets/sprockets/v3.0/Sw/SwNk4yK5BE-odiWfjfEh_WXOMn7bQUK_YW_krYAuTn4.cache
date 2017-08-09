@@ -1,0 +1,22 @@
+{:uriI"file://app/assets/templates/transactions/transaction.hamlc?type=text/hamlc&id=8401acd04d2c5ac5e83e3e943b178921e45e3d62a8ed0f8e17afc84027fb1f6e:ET:load_pathI"app/assets/templates;T:filenameI"8app/assets/templates/transactions/transaction.hamlc;T:	nameI"transactions/transaction;T:logical_pathI"#transactions/transaction.hamlc;T:content_typeI"text/hamlc;T:sourceI"³- @c = @currency.findWhere(code: @transaction.get('currency'))
+- @a = @accounts.findWhere(id: @transaction.get('account_id'))
+
+.panel.panel-default
+  .panel-body
+    %p Ammount: #{@transaction.get('ammount') + ' ' + @c.get('symbol')}
+    %p Desciption: #{@transaction.get('description')}
+    %p Date: #{@transaction.get('made_on_date')}
+    %p Currency: #{@c.get('name')} (#{@c.get('symbol')})
+    %p Account: #{@a.get('name')}
+
+
+
+
+
+
+
+;T:metadata{	:dependencieso:Set:
+@hash}
+I"environment-version;TTI"environment-paths;TTI"rails-env;TTI"4processors:type=text/hamlc&file_type=text/hamlc;TTI"Ffile-digest://app/assets/templates/transactions/transaction.hamlc;TTF:charsetI"
+utf-8;F:digest"%hà ”fé—”ÑN‡Àà,İAÙYÿiŒáÖŠlfœ:lengthi³:dependencies_digest"%É2BlûZs m›MJğklÍH–ÏÑaëøø²:idI"E8401acd04d2c5ac5e83e3e943b178921e45e3d62a8ed0f8e17afc84027fb1f6e;F:
+mtimel+ŸŠY
