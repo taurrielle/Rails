@@ -15,7 +15,6 @@ class AccountsController < ApplicationController
     respond_with current_user.accounts.create(account_params)
   end
 
-
   def update
     respond_with Account.find(params[:id]).update(balance_param)
   end

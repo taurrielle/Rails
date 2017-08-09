@@ -6,7 +6,6 @@ class DemoApp.Views.TransactionsIndex extends Backbone.View
     'submit #new_transaction': 'createTransaction'
     'click #transaction_button': 'showForm'
 
-
   initialize: ->
     @collection.on('reset', @render, this)
     @collection.on('add', @appendTransaction, this)

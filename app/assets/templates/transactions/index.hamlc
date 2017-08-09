@@ -27,6 +27,5 @@
     .form-group
       %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
 
-
 %h2 Your transactions
 %div{:id => "transactions"}

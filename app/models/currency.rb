@@ -1,2 +1,1 @@
-class Currency < ApplicationRecord
-end
+class Currency < ApplicationRecord; end

@@ -3,7 +3,6 @@ class DemoApp.Routers.Accounts extends Backbone.Router
     'pages/accounts': 'allAccounts'
     'pages/transactions': 'allTransactions'
 
-
   initialize: ->
     @collection = new DemoApp.Collections.Accounts()
     @collection.fetch({ reset: true })

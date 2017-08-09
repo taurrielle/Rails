@@ -6,7 +6,6 @@ class DemoApp.Views.AccountsIndex extends Backbone.View
     'submit #new_account': 'createAccount'
     'click #account_button': 'showForm'
 
-
   initialize: ->
     @collection.on('reset', @render, this)
     @collection.on('add', @appendAccount, this)
