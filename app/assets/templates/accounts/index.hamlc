@@ -1,0 +1,26 @@
+%button{:class => "btn btn-primary", :id => "account_button"} Add account
+%div{:id => "account_form"}
+  %h2 Add account
+  %div{:id => "error", :class => "alert alert-danger"}
+
+  %form{:id => "new_account"}
+    .form-group
+      %label Name:
+      %input{:class => "form-control", :type => "text", :name => "name", :placeholder => "Account name", :id => "new_account_name"}
+
+    .form-group
+      %label Balance:
+      %input{:class => "form-control", :type => "number", :name => "balance", :placeholder => "Balance", :id => "new_account_balance"}
+
+    .form-group
+      %label Currency:
+      %select{:class => "form-control", :id => "new_account_currency"}
+        %option{:value => ""} Select a currency
+        -for c in @currency.models
+          %option{:value => "#{c.get('code')}"} = c.get("name") + " (" + c.get("symbol") + ")"
+
+    .form-group
+      %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
+
+%h2 Your accounts
+%div{:id => "accounts"}

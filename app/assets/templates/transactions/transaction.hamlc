@@ -1,0 +1,17 @@
+- @c = @currency.findWhere(code: @transaction.get('currency'))
+- @a = @accounts.findWhere(id: @transaction.get('account_id'))
+
+.panel.panel-default
+  .panel-body
+    %p Ammount: #{@transaction.get('ammount') + ' ' + @c.get('symbol')}
+    %p Desciption: #{@transaction.get('description')}
+    %p Date: #{@transaction.get('made_on_date')}
+    %p Currency: #{@c.get('name')} (#{@c.get('symbol')})
+    %p Account: #{@a.get('name')}
+
+
+
+
+
+
+

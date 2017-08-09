@@ -4,8 +4,10 @@ window.DemoApp =
   Views: {}
   Routers: {}
   initialize: ->
-  	new DemoApp.Routers.Accounts()
-  	Backbone.history.start(pushState: true)
+    new DemoApp.Routers.Accounts()
+    Backbone.history.start(pushState: true)
 
 $(document).ready ->
   DemoApp.initialize()
+
+

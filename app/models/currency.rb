@@ -1,3 +1,1 @@
-class Currency < ApplicationRecord
-	belongs_to :account
-end
+class Currency < ApplicationRecord; end

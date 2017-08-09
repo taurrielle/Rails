@@ -1,0 +1,31 @@
+%button{:class => "btn btn-primary", :id => "transaction_button"} Add transaction
+%div{:id => "transaction_form"}
+
+  %h2 Add transaction
+  %div{:id => "error", :class => "alert alert-danger"}
+
+  %form{:id => "new_transaction"}
+    .form-group
+      %label Account:
+      %select{:class => "form-control", :id => "new_transaction_account"}
+        %option{:value => ""} Select an account
+        -for account in @accounts.models
+          %option{:value => "#{account.get('id')}"} = account.get("name")
+
+    .form-group
+      %label Ammount:
+      %input{:class => "form-control", :type => "number", :name => "ammount", :placeholder => "Ammount", :id => "new_transaction_ammount"}
+
+    .form-group
+      %label Description:
+      %input{:class => "form-control", :type => "text", :name => "description", :placeholder => "Description", :id => "new_transaction_description"}
+
+    .form-group
+      %label Made on:
+      %input{:class => "form-control", :type => "date", :name => "made on", :placeholder => "Date", :id => "new_transaction_date"}
+
+    .form-group
+      %input{:type => "submit", :class => "btn btn-success", :value => "Add"}
+
+%h2 Your transactions
+%div{:id => "transactions"}

@@ -1,7 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
 body {
   padding-top: 60px;
 }
@@ -22,7 +21,7 @@ textarea {
   margin-bottom: 10px;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1, h2 {
   line-height: 1;
 }
 
@@ -34,22 +33,29 @@ h1 {
 }
 
 h2 {
-  font-size: 1.2em;
+  font-size: 2em;
   letter-spacing: -1px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
   font-weight: normal;
   color: #777;
 }
 
+h3 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-top: 10px;
+  line-height: 0.7;
+}
+
 p {
   font-size: 1.1em;
-  line-height: 1.7em;
+  line-height: 0.8em;
 }
 
 #logo {
   float: left;
-  margin-right: 10px;
+  margin-right: 30px;
   font-size: 1.7em;
   color: #fff;
   text-transform: uppercase;
@@ -77,8 +83,49 @@ form {
   margin-right: auto;
 }
 
+#error {
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: none;
+}
+
+#accounts, #transactions {
+  width: 350px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0px;
+}
+
+#account_form, #transaction_form {
+  display: none;
+}
+
 input[type="checkbox"], input[type="radio"] {
   width: 5%;
 }
 
+.alert-alert {
+  @extend .alert-warning;
+}
 
+.alert-notice {
+  @extend .alert-info;
+}
+
+nav > ul > li > a:hover {
+border-bottom: 2px solid #85d4cd;
+text-decoration: none;
+}
+
+li.active > a{
+  border-bottom: 2px solid #85d4cd;
+}
+
+nav > ul > li > a {
+  font-size: 1.1em;
+  letter-spacing: -0.3px;
+  border-bottom: 2px solid #333
+}
