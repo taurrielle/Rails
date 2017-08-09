@@ -1,0 +1,13 @@
+/.bundle
+/.project
+/vendor/bundle
+/node_modules
+
+/db/*.sqlite3
+/db/*.sqlite3-journal
+/config/database.yml
+/config/secrets.yml
+
+/log/*.log
+/tmp
+.keep
